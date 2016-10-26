@@ -40,11 +40,10 @@ public class GameEngine {
 	private Random random = new Random();
 	
 	/**
-	 * Initialize attribute(s) and game 
+	 * Initialize attribute(s)	 
 	 */
 	public GameEngine() {
 		ui = new UI();
-		run();
 	}
 	
 	/**
@@ -55,19 +54,12 @@ public class GameEngine {
 		player = new Player(pickGun());
 		ui.setPlayer(player);
 		
-		String combatAction = "";
 		while (!gameFinished) {
 			ui.printBoard();
 			takeStep();
+			gameSleep(stepDelay);	
 			if (enemyEncountered()) {
 				fightEnemy();
-			}
-			else {
-				try {
-					Thread.sleep(stepDelay);
-				}
-				catch (InterruptedException e) {
-				}
 			}
 		}
 	}
@@ -163,6 +155,18 @@ public class GameEngine {
 	 */
 	public boolean enemyEncountered() {
 		return random.nextDouble() <= encounterProbability ? true: false;
+	}
+	
+	/**
+	 * System sleep for given amount of time
+	 * @param time The amount of time (in milliseconds) to sleep for
+	 */
+	public void gameSleep(long sleep) {
+		try {
+			Thread.sleep(sleep);
+		}
+		catch (InterruptedException e) {
+		}
 	}
 	
 	/**

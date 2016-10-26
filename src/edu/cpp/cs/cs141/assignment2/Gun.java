@@ -25,41 +25,41 @@ public abstract class Gun {
 	/**
 	 * Probability the gun bullet hits its target 
 	 */
-	private double hitProbability = 0;
+	private double accuracy = 0.0;
 	
 	/**
 	 * Default constructor for gun
 	 * @param name: set attribute name to this value
 	 * @param ammo: set attribute ammo to this value
 	 * @param damage: set attribute damage to this value
-	 * @param hitProbability: set attribute hitProbability to this value
+	 * @param hitProbability: set attribute accuracy to this value
 	 */
 	public Gun(String name, int damage, int ammo, double hitProbability) {
 		this.name = name;
 		this.damage = damage;
 		this.ammo = ammo;
-		this.hitProbability = hitProbability;
+		this.accuracy = hitProbability;
 	}
 	
 	/**
 	 * @return the name of this gun
 	 */
 	public String name() {
-		return this.name;
+		return name;
 	}
 	
 	/**
 	 * @return the amount of damage this gun deals
 	 */
 	public int damage() {
-		return this.damage;
+		return damage;
 	}
 	
 	/**
 	 * @return the {@link hitProbability} of the gun
 	 */
-	public double hitProbability() {
-		return this.hitProbability();
+	public double accuracy() {
+		return accuracy;
 	}
 	
 	/**
@@ -67,7 +67,7 @@ public abstract class Gun {
 	 */
 	public boolean hitTarget() {
 		Random random = new Random();
-		return random.nextDouble() <= this.hitProbability ? true: false;
+		return random.nextDouble() <= accuracy ? true: false;
 	}
 	
 	/**
@@ -99,7 +99,7 @@ public abstract class Gun {
 	 * @return true if there's enough ammo for bullet and target was hit 
 	 */
 	public boolean fire() {
-		if (this.ammo > 0) {
+		if (ammo > 0) {
 			changeAmmoBy(-1);
 			if (hitTarget()) {
 				return true;

@@ -51,7 +51,8 @@ public class GameEngine {
 	 */
 	public void run() {
 		ui.welcome();
-		player = new Player(pickGun());
+		Gun gunChoice = pickGun();
+		player = new Player(gunChoice);
 		ui.setPlayer(player);
 		
 		while (!gameFinished) {
@@ -70,6 +71,7 @@ public class GameEngine {
 	public void takeStep() {
 		if (player.position() == 10) {
 			gameWon();
+			System.exit(0);
 		}
 		else {
 			player.changePositionBy(1);
@@ -123,11 +125,14 @@ public class GameEngine {
 	public Gun pickGun() {
 		Gun gun;
 		String gunName = ui.getGunChoice();
-		if (gunName == "pistol") {
+		if (gunName.equals("pistol")) {
 			gun = new Pistol();
 		}
-		else if (gunName == "rifle") {
+		else if (gunName.equals("rifle")) {
 			gun = new Rifle();
+		}
+		else if (gunName.equals("shotgun")) {
+			gun = new Shotgun();
 		}
 		else {
 			gun = new Shotgun();

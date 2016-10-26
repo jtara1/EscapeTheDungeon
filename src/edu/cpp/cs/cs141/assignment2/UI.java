@@ -72,8 +72,8 @@ public class UI {
 	public String getCombatAction() {
 		String userInput = "";
 		String[] options = {"Attack", "Escape"};
-		while (userInput != options[0].toLowerCase() ||
-				userInput != options[1].toLowerCase()) {
+		while (!userInput.equals(options[0].toLowerCase()) &&
+				!userInput.equals(options[1].toLowerCase())) {
 		
 			System.out.printf(
 					"Enter the name of the gun you'd like to use.\n" +
@@ -94,14 +94,14 @@ public class UI {
 		}
 		System.out.printf(
 				"Tile you're on: %d\n" +
-				"HP: %d\n" +
+				"HP: %02d\n" +
 				"Gun: %s\n" +
-				"Probability to Hit Enemy: %0.0f\n" +
-				"Damage: %d", 
+				"Accuracy: %.2f\n" +
+				"Damage: %d\n\n", 
 				player.position(),
 				player.health(),
 				player.gun.name(),
-				player.gun.hitProbability(),
+				player.gun.accuracy(),
 				player.gun.damage());
 	}
 	
@@ -109,18 +109,30 @@ public class UI {
 	 * Displays stats of all characters and guns, but now there's an enemy on the loose
 	 */
 	public void printBoard(Enemy enemy) {
+		int distanceBetweenTextBody = 28;
+		String playerGunName = String.format("Gun: %s", player.gun.name());
+		int distanceBetweenGunNames = distanceBetweenTextBody - playerGunName.length();
+		
 		System.out.printf(
 				"Tile you're on: %d\n" +
-				"HP: %d\n" +
-				"Gun: %s\n" +
-				"Probability to Hit Enemy: %0.0f\n" +
-				"Damage: %d\n" +
-				"Yo fix this later", 
+				"Player Stats:%15sEnemy Stats:\n" +
+				"HP: %02d%22sHP: %02d\n" +
+				"Gun: %s%" + distanceBetweenGunNames + "sGun: %s\n" +
+				"Accuracy: %.2f%14sAccuracy: %.2f\n" +
+				"Damage: %d%19sDamage: %s\n",
 				player.position(),
-				player.health(),
-				player.gun.name(),
-				player.gun.hitProbability(),
-				player.gun.damage());
+				"",
+				player.health(), "", enemy.health(),
+				player.gun.name(), "", enemy.gun.name(),
+				player.gun.accuracy(), "", enemy.gun.accuracy(),
+				player.gun.damage(), "", enemy.gun.damage());
+	}
+	
+	/**
+	 * Remove '\n' and '\r' characters from string
+	 */
+	private String removeCRLF(String string) {
+		return string.replace("\n", "").replace("\r", "");
 	}
 	
 	/**
@@ -132,15 +144,15 @@ public class UI {
 	public String getGunChoice() {
 		String userInput = "";
 		String[] options = {"Pistol", "Rifle", "Shotgun"};
-		while (userInput != options[0].toLowerCase() ||
-					userInput != options[1].toLowerCase() ||
-					userInput != options[2].toLowerCase()) {
+		while (!userInput.equals(options[0].toLowerCase()) &&
+					!userInput.equals(options[1].toLowerCase()) &&
+					!userInput.equals(options[2].toLowerCase())) {
 			
 			System.out.printf(
 					"Enter the name of the gun you'd like to use.\n" +
 					"Options: %s, %s, or %s\n", 
 					options[0], options[1], options[2]);
-			userInput = keyboard.nextLine().toLowerCase();
+			userInput = removeCRLF(keyboard.nextLine().toLowerCase().trim());
 		}
 		return userInput;
 	}

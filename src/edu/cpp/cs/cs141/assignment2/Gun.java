@@ -23,6 +23,11 @@ public abstract class Gun {
 	private int ammo = 0;
 	
 	/**
+	 * Used to generate random numbers
+	 */
+	private Random random = null;
+	
+	/**
 	 * Probability the gun bullet hits its target 
 	 */
 	private double accuracy = 0.0;
@@ -39,6 +44,7 @@ public abstract class Gun {
 		this.damage = damage;
 		this.ammo = ammo;
 		this.accuracy = hitProbability;
+		this.random = new Random();
 	}
 	
 	/**
@@ -63,10 +69,16 @@ public abstract class Gun {
 	}
 	
 	/**
+	 * @return the amount of {@link ammo} for the gun 
+	 */
+	public int ammo() {
+		return ammo;
+	}
+	
+	/**
 	 * @return {@code true} if gun bullet hit target, {@code false} otherwise
 	 */
 	public boolean hitTarget() {
-		Random random = new Random();
 		return random.nextDouble() <= accuracy ? true: false;
 	}
 	

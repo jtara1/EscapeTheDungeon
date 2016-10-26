@@ -25,6 +25,18 @@ public class UI {
 	private Scanner keyboard = null;
 	
 	/**
+	 * Used in print formatting to determine total (horizontal) characters in player 
+	 * stats text body
+	 */
+	private final int playerTextBodyLength = 28;
+	
+	/**
+	 * Integer used in print formatting to determine amount of characters between player and
+	 * enemy gun names
+	 */
+	private int distanceBetweenGunNames = 0;
+	
+	/**
 	 * Construct a UIText object without any parameters
 	 */
 	public UI() {
@@ -37,16 +49,19 @@ public class UI {
 	 * gun, etc.
 	 */
 	public UI(Player player) {
-		this.player = player;
-		keyboard = new Scanner(System.in);
+		this(); // calls UI() (default constructor)
+		setPlayer(player);
 	}
 	
 	/**
-	 * Set attribute player to {@param player}
+	 * Set attribute player to {@param player} and determine how much whitespace needed 
+	 * between player and enemy gun prints
 	 * @param player passed parameter becomes player attribute
 	 */
 	public void setPlayer(Player player) {
 		this.player = player;
+		String playerGunName = String.format("Gun: %s", player.gun.name());
+		distanceBetweenGunNames = playerTextBodyLength - playerGunName.length();
 	}
 	
 	/**
@@ -108,11 +123,7 @@ public class UI {
 	/**
 	 * Displays stats of all characters and guns, but now there's an enemy on the loose
 	 */
-	public void printBoard(Enemy enemy) {
-		int distanceBetweenTextBody = 28;
-		String playerGunName = String.format("Gun: %s", player.gun.name());
-		int distanceBetweenGunNames = distanceBetweenTextBody - playerGunName.length();
-		
+	public void printBoard(Enemy enemy) {	
 		System.out.printf(
 				"Tile you're on: %d\n" +
 				"Player Stats:%15sEnemy Stats:\n" +

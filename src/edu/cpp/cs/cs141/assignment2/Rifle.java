@@ -8,7 +8,7 @@ public class Rifle extends Gun {
 	 * Construct a Rifle object with pre-defined values for attributes
 	 */
 	public Rifle() {
-		// params: damage, ammo, hitProbability
+		// parameters: name, damage, ammo, hitProbability
 		super("Rifle", 2, 12, 0.65);
 	}
 }

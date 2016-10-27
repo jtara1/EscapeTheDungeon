@@ -11,6 +11,6 @@ public class Enemy extends Character {
 	 * @param gun
 	 */
 	public Enemy(int pos, Gun gun) {
-		super(5, pos, gun);
+		super("Enemy", 5, pos, gun);
 	}
 }

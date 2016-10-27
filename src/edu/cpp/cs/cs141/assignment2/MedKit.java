@@ -5,15 +5,12 @@ package edu.cpp.cs.cs141.assignment2;
  * @author j
  */
 public class MedKit extends ItemDrop {
-	/**
-	 * Minimum amount healed by this medkit
-	 */
-	int value = 2;
 	
 	/**
-	 * Increment {@code value} by random integer in range [0, 2]
+	 * Construct a medkit object
 	 */
 	public MedKit() {
-		super(3);
+		// parameters: name, action message, value, hit probability
+		super("Med Kit", "restored %d health", 5, 0.30);
 	}
 }

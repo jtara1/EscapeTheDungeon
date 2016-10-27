@@ -12,12 +12,27 @@ public class GameEngine {
 	/**
 	 * User interface (ui) which handles printing text for user and getting user input
 	 */
-	private UI ui;
+	private UI ui = null;
 	
 	/**
 	 * The character the user controls
 	 */
-	private Player player;
+	private Player player = null;
+	
+	/**
+	 * The enemy that opposes the player
+	 */
+	private Enemy enemy = null;
+	
+	/**
+	 * MedKit object used as an itemDrop
+	 */
+	private MedKit medKit = new MedKit();
+	
+	/**
+	 * AmmoPack object used as an itemDrop
+	 */
+	private AmmoPack ammoPack = new AmmoPack();
 	
 	/**
 	 * The game stops looping when this is true
@@ -51,8 +66,8 @@ public class GameEngine {
 	 */
 	public void run() {
 		ui.welcome();
-		Gun gunChoice = pickGun();
-		player = new Player(gunChoice);
+		player = new Player(pickGun());
+		ammoPack.setValue(player.gun.maxAmmo());
 		ui.setPlayer(player);
 		
 		while (!gameFinished) {
@@ -84,35 +99,58 @@ public class GameEngine {
 	public void fightEnemy() {
 		String userAction = "";
 		boolean hitTarget = false;
-		Enemy enemy = new Enemy(player.position(), pickRandomGunForEnemy());
+		enemy = new Enemy(player.position(), pickRandomGunForEnemy());
+		int damageDealt = 0;
 		
 		while (!(player.isDead() || enemy.isDead())) {
 			ui.printBoard(enemy);
 			userAction = ui.getCombatAction();
 			// player action
-			if (userAction == "attack") {
+			if (userAction.equals("attack")) {
 				hitTarget = player.gun.fire();
 				if (hitTarget) {
-					enemy.changeHealthBy(-1 * player.gun.damage());
-					if (enemy.isDead()) {
-						ui.enemyDefeat();
-						return;
+					damageDealt = player.gun.damage();
+					enemy.changeHealthBy(-1 * damageDealt);
+				}
+				else if (!hitTarget) {
+					damageDealt = 0;
+				}
+				ui.combatReport(player.name(), enemy.name(), damageDealt);
+				if (enemy.isDead()) {
+					ui.enemyDefeat();
+					ItemDrop item = getRandomItem(); // apply item to player / player gun
+					if (item.name().equals(medKit.name())) {
+						player.changeHealthBy(item.value());
 					}
+					else if (item.name().equals(ammoPack.name())) {
+						player.gun.changeAmmoBy(item.value());
+					}
+					ui.itemAcquired(item);
+					return;
 				}
 			}
-			else if (userAction == "escape") {
+			else if (userAction.equals("escape")) {
 				if (player.escapeSucceeded()) {
 					player.changePositionBy(-1);
 					return;
 				}
 			}
 			// enemy action
+			if (enemy.gun.ammo() <= 0) {
+				ui.enemyRanAway(true);
+				return;
+			}
 			hitTarget = enemy.gun.fire();
 			if (hitTarget) {
-				player.changeHealthBy(-1 * enemy.gun.damage());
-				if (player.isDead()) {
-					gameOver();
-				}
+				damageDealt = enemy.gun.damage();
+				player.changeHealthBy(-1 * damageDealt);
+			}
+			else if (!hitTarget) {
+				damageDealt = 0;
+			}
+			ui.combatReport(enemy.name(), player.name(), damageDealt);
+			if (player.isDead()) {
+				gameOver();
 			}
 		}
 	}
@@ -160,6 +198,16 @@ public class GameEngine {
 	 */
 	public boolean enemyEncountered() {
 		return random.nextDouble() <= encounterProbability ? true: false;
+	}
+	
+	/**
+	 * @return random {@link ItemDrop} object 
+	 */
+	public ItemDrop getRandomItem() {
+		if (random.nextDouble() <= medKit.dropProbability()) {
+			return medKit;
+		}
+		return ammoPack;
 	}
 	
 	/**

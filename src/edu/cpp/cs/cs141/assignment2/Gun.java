@@ -18,6 +18,11 @@ public abstract class Gun {
 	private int damage = 0;
 	
 	/**
+	 * Maximum amount of ammunition 
+	 */
+	private int maxAmmo = 0;
+	
+	/**
 	 * Amount of ammunition for the gun
 	 */
 	private int ammo = 0;
@@ -43,6 +48,7 @@ public abstract class Gun {
 		this.name = name;
 		this.damage = damage;
 		this.ammo = ammo;
+		this.maxAmmo = ammo;
 		this.accuracy = hitProbability;
 		this.random = new Random();
 	}
@@ -73,6 +79,13 @@ public abstract class Gun {
 	 */
 	public int ammo() {
 		return ammo;
+	}
+	
+	/**
+	 * @return the maximum amount of {@link ammo} for the gun
+	 */
+	public int maxAmmo() {
+		return maxAmmo;
 	}
 	
 	/**

@@ -26,9 +26,15 @@ public abstract class Character implements Agent {
 	protected int position;
 	
 	/**
+	 * Name of this character
+	 */
+	private String name = "";
+	
+	/**
 	 * Set defaults for character with no parameters passed in constructor
 	 */
-	public Character(Gun gun) {
+	public Character(String name, Gun gun) {
+		this.name = name;
 		this.maxHealth = 20;
 		this.health = maxHealth;
 		this.position = 0;
@@ -41,7 +47,8 @@ public abstract class Character implements Agent {
 	 * @param pos set {@link position} to pos
 	 * @param gun set {@link gun} to gun
 	 */
-	public Character(int hp, int pos, Gun gun) {
+	public Character(String name, int hp, int pos, Gun gun) {
+		this.name = name;
 		this.maxHealth = hp;
 		this.health = hp;
 		this.position = pos;
@@ -49,17 +56,24 @@ public abstract class Character implements Agent {
 	}
 	
 	/**
-	 * Position of character on board in game
+	 * @return name (String) of this character
 	 */
-	public int position() {
-		return this.position;
+	public String name() {
+		return name;
 	}
 	
 	/**
-	 * Current health of player
+	 * @return position of character on board in game
+	 */
+	public int position() {
+		return position;
+	}
+	
+	/**
+	 * @return current health of player
 	 */
 	public int health() {
-		return this.health;
+		return health;
 	}
 	
 	/**
@@ -68,9 +82,12 @@ public abstract class Character implements Agent {
 	 * @param amount value to change health by
 	 */
 	public void changeHealthBy(int amount) {
-		this.health += amount;
-		if (this.health > this.maxHealth) {
-			this.health = maxHealth;
+		health += amount;
+		if (health > maxHealth) {
+			health = maxHealth;
+		}
+		else if (health < 0) {
+			health = 0;
 		}
 	}
 	
@@ -79,6 +96,6 @@ public abstract class Character implements Agent {
 	 * @return true or false indicating character is dead
 	 */
 	public boolean isDead() {
-		return this.health <= 0 ? true: false;
+		return health <= 0 ? true: false;
 	}
 }

@@ -6,6 +6,7 @@ public class Main {
 		GameEngine game = new GameEngine();
 		game.run();
 //		testFormatting();
+//		testThings();
 	}
 	
 	public static void testFormatting() {
@@ -27,5 +28,23 @@ public class Main {
 		String myStr2 = "Player Stats:               ";
 		System.out.println(myStr.length());
 		System.out.println(myStr2.length());
+	}
+	
+	public static void testThings() {
+		ItemDrop item = new MedKit();
+		System.out.println(item.getClass());
+//		if ((String)item.getClass() == "MedKit") {
+//			System.out.println("yes");
+//		}
+		String[] array = testThings2();
+		for (String s: array) {
+			System.out.println(s);
+		}
+		
+	}
+	
+	public static String[] testThings2() {
+		String[] str = {"hello", "world"};
+		return str;
 	}
 }

@@ -76,7 +76,7 @@ public class UI {
 	 */
 	public void welcome() {
 		System.out.printf("Escape the Dungeon!\n" +
-				"Can you make it to the great beyond of tile 11?\n");
+				"Can you make it to the great beyond of tile 10?\n");
 	}
 	
 	/**
@@ -91,10 +91,10 @@ public class UI {
 				!userInput.equals(options[1].toLowerCase())) {
 		
 			System.out.printf(
-					"Enter the name of the gun you'd like to use.\n" +
+					"A fearsome enemy stands in your way.\n" +
 					"Options: %s or %s\n", 
 					options[0], options[1]);
-		userInput = keyboard.nextLine().toLowerCase();
+		userInput = removeCRLF(keyboard.nextLine().toLowerCase().trim());
 		}
 		return userInput;
 	}
@@ -111,11 +111,13 @@ public class UI {
 				"Tile you're on: %d\n" +
 				"HP: %02d\n" +
 				"Gun: %s\n" +
+				"Ammo: %03d\n" +
 				"Accuracy: %.2f\n" +
 				"Damage: %d\n\n", 
 				player.position(),
 				player.health(),
 				player.gun.name(),
+				player.gun.ammo(),
 				player.gun.accuracy(),
 				player.gun.damage());
 	}
@@ -129,14 +131,35 @@ public class UI {
 				"Player Stats:%15sEnemy Stats:\n" +
 				"HP: %02d%22sHP: %02d\n" +
 				"Gun: %s%" + distanceBetweenGunNames + "sGun: %s\n" +
+				"Ammo: %03d%19sAmmo: %03d\n" +
 				"Accuracy: %.2f%14sAccuracy: %.2f\n" +
-				"Damage: %d%19sDamage: %s\n",
+				"Damage: %d%19sDamage: %s\n\n",
 				player.position(),
 				"",
 				player.health(), "", enemy.health(),
 				player.gun.name(), "", enemy.gun.name(),
+				player.gun.ammo(), "", enemy.gun.ammo(),
 				player.gun.accuracy(), "", enemy.gun.accuracy(),
 				player.gun.damage(), "", enemy.gun.damage());
+	}
+	
+	/**
+	 * Print message notifying who dealt damage to who and for how much damage
+	 * @param target: the one who recieved the damage
+	 * @param dealer: the one who dealt it
+	 * @param damageTaken: amount of damage dealt
+	 */
+	public void combatReport(String dealer, String target, int damageTaken) {
+		System.out.printf("%s dealt %d damage to %s.\n", dealer, damageTaken, target);
+	}
+	
+	/**
+	 * Print message notifying event of enemy running away
+	 * @param noAmmo: if true this indicates the enemy had no ammo
+	 */
+	public void enemyRanAway(boolean noAmmo) {
+		String extraInfo = noAmmo ? " since he had no more ammo": "";
+		System.out.println("Enemy ran off" + extraInfo);
 	}
 	
 	/**
@@ -173,6 +196,13 @@ public class UI {
 	 */
 	public void enemyDefeat() {
 		System.out.println("Good job defeating the enemy; keep up the hard work!");
+	}
+	
+	/**
+	 * Print item acquired message
+	 */
+	public void itemAcquired(ItemDrop item) {
+		System.out.printf("You used %s and %s.\n", item.name(), item.action());
 	}
 	
 	/**

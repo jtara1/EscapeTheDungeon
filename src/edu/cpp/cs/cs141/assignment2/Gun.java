@@ -99,7 +99,11 @@ public abstract class Gun {
 	 * Change {@link ammo} value by {@param amount}
 	 */
 	public void changeAmmoBy(int amount) {
-		this.ammo += amount;
+		ammo += amount;
+		if (ammo > maxAmmo) 
+			ammo = maxAmmo;
+		else if (ammo < 0) 
+			ammo = 0;
 	}
 	
 	/**

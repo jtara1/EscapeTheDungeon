@@ -1,7 +1,5 @@
 package edu.cpp.cs.cs141.assignment2;
 
-import java.util.Random;
-
 /**
  * Shared methods and attributes of all dropable items in <i>Escape the Dungeon</i>
  */

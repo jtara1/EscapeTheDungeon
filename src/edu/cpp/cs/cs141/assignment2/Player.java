@@ -26,6 +26,17 @@ public class Player extends Character {
 	}
 	
 	/**
+	 * Alternative constructor that allows specification of player name, hp and gun
+	 * @param name: name of player
+	 * @param hp: amount of hit points
+	 * @param gun: gun the player wields
+	 */
+	public Player(String name, int hp, Gun gun) {
+		// parameters: name, hp, position, gun
+		super(name, hp, 0, gun);
+	}
+	
+	/**
 	 * Change player {@link position} by {@param value}
 	 */
 	public void changePositionBy(int value) {

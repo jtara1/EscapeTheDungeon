@@ -8,6 +8,7 @@ public class AmmoPack extends ItemDrop {
 	
 	/**
 	 * Construct an ammopack object
+	 * Note: The amount of the ammo in the pack is determined by the type of the gun
 	 */
 	public AmmoPack() {
 		// parameters: name, action message, value, hit probability

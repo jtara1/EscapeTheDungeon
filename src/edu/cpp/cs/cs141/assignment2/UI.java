@@ -144,6 +144,27 @@ public class UI {
 	}
 	
 	/**
+	 * Displays stats of all characters and guns, but now there's an enemy on the loose
+	 */
+	public void printCombatBoard() {	
+		System.out.printf(
+				"Tile you're on: %d\n" +
+				"Player Stats:%15sEnemy Stats:\n" +
+				"HP: %02d%22sHP: %02d\n" +
+				"Gun: %s%" + distanceBetweenGunNames + "sGun: %s\n" +
+				"Ammo: %03d%19sAmmo: %03d\n" +
+				"Accuracy: %.2f%14sAccuracy: %.2f\n" +
+				"Damage: %d%19sDamage: %s\n\n",
+				player.position(),
+				"",
+				player.health(), "", enemy.health(),
+				player.gun.name(), "", enemy.gun.name(),
+				player.gun.ammo(), "", enemy.gun.ammo(),
+				player.gun.accuracy(), "", enemy.gun.accuracy(),
+				player.gun.damage(), "", enemy.gun.damage());
+	}
+	
+	/**
 	 * Print message notifying who dealt damage to who and for how much damage
 	 * @param target: the one who recieved the damage
 	 * @param dealer: the one who dealt it
@@ -194,7 +215,7 @@ public class UI {
 	/**
 	 * Print enemy defeat message
 	 */
-	public void enemyDefeat() {
+	public void enemyDefeated() {
 		System.out.println("Good job defeating the enemy; keep up the hard work!");
 	}
 	
@@ -218,6 +239,9 @@ public class UI {
 	 * Print game over message
 	 */
 	public void gameOver() {
-		System.out.println("you lost; now git gud");
+		System.out.println("you lost; now git gud\n" +
+				"Here's your final stats from the previous combat session:");
+		printCombatBoard();
+		
 	}
 }

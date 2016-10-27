@@ -80,6 +80,19 @@ public class UI {
 	}
 	
 	/**
+	 * Get yes or no (y/n) response from user
+	 * @param message: Should include {@code "(y/n)"} in the message
+	 */
+	public String getYesNoResponse(String message) {
+		String response = "";
+		System.out.println(message);
+		while (!response.equals("y") && !response.equals("n")) {
+			response = removeCRLF(keyboard.nextLine().toLowerCase().trim());
+		}
+		return response;
+	}
+	
+	/**
 	 * Asks user what action should be taken next and returns the response
 	 * Intended for use when faced with an enemy
 	 * @return the response from the user indicates the action he wants
@@ -216,7 +229,7 @@ public class UI {
 	 * Print enemy defeat message
 	 */
 	public void enemyDefeated() {
-		System.out.println("Good job defeating the enemy; keep up the hard work!");
+		System.out.println("Good job defeating the enemy; lets see what it dropped!");
 	}
 	
 	/**
@@ -240,7 +253,7 @@ public class UI {
 	 */
 	public void gameOver() {
 		System.out.println("you lost; now git gud\n" +
-				"Here's your final stats from the previous combat session:");
+				"Here's your final stats from the previous combat session:\n");
 		printCombatBoard();
 		
 	}

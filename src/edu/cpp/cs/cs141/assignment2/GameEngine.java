@@ -1,5 +1,7 @@
 package edu.cpp.cs.cs141.assignment2;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -37,7 +39,7 @@ public class GameEngine {
 	/**
 	 * The game stops looping when this is true
 	 */
-	private boolean gameFinished = false;
+	private Boolean gameFinished = false;
 	
 	/**
 	 * Probability player encounters an enemy each time player takes a step
@@ -47,12 +49,17 @@ public class GameEngine {
 	/**
 	 * Delay (in milliseconds) after a step has been taken and there's no enemy
 	 */
-	private long stepDelay = 1000;
+	private long stepDelay = 1750;
 	
 	/**
 	 * random object can generate random doubles and integers
 	 */
 	private Random random = new Random();
+	
+	/**
+	 * Game system settings; includes settings such as autoTakeStepMode
+	 */
+	private Map<String, Boolean> settings = new HashMap<String, Boolean>();
 	
 	/**
 	 * Initialize attribute(s)	 
@@ -65,17 +72,54 @@ public class GameEngine {
 	 * Start and run game
 	 */
 	public void run() {
-		ui.welcome();
+		
 		player = new Player("Player", 20, pickGun());
+		setGameSettings();
+		ui.welcome();
+		
+		String proceedQuestion = "Proceed to the next tile (y/n)?";
+		String response = "";
+		while (!gameFinished) {
+			ui.printBoard();
+			
+			if (settings.get("autoTakeStepMode")) {
+				gameSleep(stepDelay);
+				takeStep();
+			}
+			else {
+				while (!response.equals("y")) {
+					response = ui.getYesNoResponse(proceedQuestion);
+				}
+				takeStep();
+				response = "";
+			}
+				
+			if (enemyEncountered()) {
+				fightEnemy();
+			}
+		}
+	}
+	
+	/**
+	 * Set settings for game (both game system settings and some attributes that need to be
+	 * 		set during runtime)
+	 */
+	public void setGameSettings() {
 		ammoPack.setValue(player.gun.maxAmmo());
 		ui.setPlayer(player);
 		
-		while (!gameFinished) {
-			ui.printBoard();
-			takeStep();
-			gameSleep(stepDelay);	
-			if (enemyEncountered()) {
-				fightEnemy();
+		String[] settingsNames = {"autoTakeStepMode"};
+		String[] settingsMessages = {"Enable auto-take-step mode (automatically proceeds" +
+				" to next tile when possible) (y/n)?"};
+		
+		String response = "";
+		for (int i = 0; i < settingsMessages.length; i++) {
+			response = ui.getYesNoResponse(settingsMessages[i]);
+			if (response.equals("y")) {
+				settings.put(settingsNames[i], true);
+			}
+			else if (response.equals("n")) {
+				settings.put(settingsNames[i], false);
 			}
 		}
 	}
@@ -134,7 +178,7 @@ public class GameEngine {
 			ui.combatReport(player.name(), enemy.name(), damageDealt);
 			if (enemy.isDead()) {
 				ui.enemyDefeated();
-				ItemDrop item = getRandomItem(); // apply item to player / player gun
+				ItemDrop item = getRandomItem();
 				if (item.name().equals(medKit.name())) {
 					player.changeHealthBy(item.value());
 				}

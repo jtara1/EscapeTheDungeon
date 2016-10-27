@@ -107,24 +107,6 @@ public abstract class Gun {
 	}
 	
 	/**
-	 * Fire the gun and call other necessary methods
-	 * @return {@code 1} if bullet hit target, {@code 0} if bullet missed target, and
-	 * {@code 2} if there's no more ammo 
-	 */
-//	public int fire() {
-//		if (this.ammo <= 0) {
-//			return 2;
-//		}
-//		changeAmmoBy(-1);
-//		if (hitTarget()) {
-//			return 1;
-//		}
-//		else {
-//			return 0;
-//		}
-//	}
-	
-	/**
 	 * @return true if there's enough ammo for bullet and target was hit 
 	 */
 	public boolean fire() {

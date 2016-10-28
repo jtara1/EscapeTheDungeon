@@ -3,7 +3,7 @@ package edu.cpp.cs.cs141.assignment2;
 import java.util.Random;
 
 /**
- * Player class represents the user's character he controls in game
+ * Represents the user's character he controls in game
  */
 public class Player extends Character {
 	
@@ -19,7 +19,7 @@ public class Player extends Character {
 		
 	/**
 	 * Construct Player object at default starting point and health defined in super constructor  
-	 * @param gun: The gun the player will be holding
+	 * @param gun The gun the player has equipped
 	 */
 	public Player(Gun gun) {
 		super(AGENT.Player.name(), gun);
@@ -27,9 +27,9 @@ public class Player extends Character {
 	
 	/**
 	 * Alternative constructor that allows specification of player name, hp and gun
-	 * @param name: name of player
-	 * @param hp: amount of hit points
-	 * @param gun: gun the player wields
+	 * @param name name of player
+	 * @param hp amount of hit points
+	 * @param gun gun the player wields
 	 */
 	public Player(String name, int hp, Gun gun) {
 		// parameters: name, hp, position, gun
@@ -37,7 +37,7 @@ public class Player extends Character {
 	}
 	
 	/**
-	 * Change player {@link position} by {@param value}
+	 * Change player {@link #position} by {@code value}
 	 */
 	public void changePositionBy(int value) {
 		this.position += value;

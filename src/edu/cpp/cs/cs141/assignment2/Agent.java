@@ -1,7 +1,7 @@
 package edu.cpp.cs.cs141.assignment2;
 
 /**
- * Interface for utlimately creating classes such as {@link Player}  and {@link Enemy}
+ * Interface for ultimately creating classes such as {@link Player}  and {@link Enemy}
  */
 public interface Agent {
 	
@@ -18,7 +18,7 @@ public interface Agent {
 	public abstract int health();
 	
 	/**
-	 * Change agent health value by {@param amount}
+	 * Change agent health value by {@code amount}
 	 * @param amount value to decrease health by
 	 */
 	public abstract void changeHealthBy(int amount);

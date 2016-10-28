@@ -1,7 +1,7 @@
 package edu.cpp.cs.cs141.assignment2;
 
 /**
- * Represents a medkit in <i>Escape the Dungeon!</i> that can restore health
+ * Represents a medkit in <i>Escape the Dungeon!</i> that can be used to restore health
  * @author j
  */
 public class MedKit extends ItemDrop {

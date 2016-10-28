@@ -28,8 +28,7 @@ public class Enemy extends Character {
 	}
 	
 	/**
-	 * Randomly create new gun object and set {@link gun} attribute of Enemy to the gun
-	 * @return
+	 * Randomly create new gun object and set {@link #gun} attribute of Enemy to gun created
 	 */
 	public void equipRandomGun() {
 		double randomDouble = random.nextDouble();

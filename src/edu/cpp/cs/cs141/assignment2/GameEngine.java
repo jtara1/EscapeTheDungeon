@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Random;
 
 /**
- * Handles game logic
+ * Handles game logic and brings everything together
  * @author James Taracevicz
  *
  */
@@ -229,7 +229,7 @@ public class GameEngine {
 	
 	
 	/**
-	 * Use UI method {@link getGunChoice} to prompt user to select a gun
+	 * Use UI method {@link UI#getGunChoice} to prompt user to select a gun
 	 * then create a gun object based on String of what user chose
 	 * @return gun object created
 	 */
@@ -252,8 +252,8 @@ public class GameEngine {
 	}
 	
 	/**
-	 * Randomly pick a gun; {@link Enemy.equipRandomGun()} also does something similar
-	 * @return the gun object
+	 * Randomly pick a gun; {@link Enemy#equipRandomGun()} also does something similar
+	 * @return the gun object picked
 	 */
 	public Gun pickRandomGunForEnemy() {
 		double[] gunPickProb = {0.50, 0.35, 0.15}; // gun pick probabilities
@@ -284,8 +284,8 @@ public class GameEngine {
 	}
 	
 	/**
-	 * System sleep for given amount of time
-	 * @param time The amount of time (in milliseconds) to sleep for
+	 * System sleeps for given amount of time
+	 * @param sleep The amount of time (in milliseconds) to sleep for
 	 */
 	public void gameSleep(long sleep) {
 		try {

@@ -43,9 +43,9 @@ public abstract class Character implements Agent {
 	
 	/**
 	 * Specify attributes with parameters in constructor
-	 * @param hp set {@link health} and {@link maxHealth} to hp
-	 * @param pos set {@link position} to pos
-	 * @param gun set {@link gun} to gun
+	 * @param hp set {@link #health} and {@link #maxHealth} to hp
+	 * @param pos set {@link #position} to pos
+	 * @param gun set {@link #gun} to gun
 	 */
 	public Character(String name, int hp, int pos, Gun gun) {
 		this.name = name;
@@ -77,8 +77,8 @@ public abstract class Character implements Agent {
 	}
 	
 	/**
-	 * Change {@link health} value by {@param amount}. If new {@link health} value exceeds
-	 * that of {@link maxHealth}, then set {@link health} to {@link maxHealth}
+	 * Change {@link #health} value by {@code amount}. If new {@link #health} value exceeds
+	 * 		that of {@link #maxHealth}, then set {@link #health} to {@link #maxHealth}
 	 * @param amount value to change health by
 	 */
 	public void changeHealthBy(int amount) {

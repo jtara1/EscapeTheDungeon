@@ -7,22 +7,22 @@ package edu.cpp.cs.cs141.assignment2;
 public interface Item {
 	
 	/**
-	 * @return name(String): name of what this object represents
+	 * @return name of what this object represents
 	 */
 	public abstract String name();
 	
 	/**
-	 * @return (String) past tense of action taken when item is applied
+	 * @return past tense of action taken when item is applied
 	 */
 	public abstract String action();
 	
 	/**
-	 * @return value(int): value attribute of object
+	 * @return value value attribute of object
 	 */
 	public abstract int value();
 	
 	/**
-	 * @param value: set attribute value to {@param value}
+	 * @param value set attribute {@link #value} to {@code value}
 	 */
 	public abstract void setValue(int value);
 	

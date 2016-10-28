@@ -3,7 +3,7 @@ package edu.cpp.cs.cs141.assignment2;
 import java.util.Scanner;
 
 /**
- * User Interface (text-based) to communicate with user and get user input
+ * User Interface (text-based) to display info to user and get user input
  * @author j
  *
  */
@@ -45,7 +45,7 @@ public class UI {
 	
 	/**
 	 * Construct a UI object
-	 * Set {@link player} equal to {@param player} to use to get values of health, position,
+	 * Set {@link #player} equal to {@code player} to use to get values of health, position,
 	 * 		gun, etc.
 	 */
 	public UI(Player player) {
@@ -55,7 +55,7 @@ public class UI {
 	}
 	
 	/**
-	 * Set attribute player to {@param player} and determine how much whitespace needed 
+	 * Set attribute player to {@code player} and determine how much whitespace needed 
 	 * 		between player and enemy gun prints
 	 * @param player passed parameter becomes player attribute
 	 */
@@ -66,7 +66,7 @@ public class UI {
 	}
 	
 	/**
-	 * @param enemy set {@link enemy} to this
+	 * @param enemy set {@link #enemy} to this
 	 */
 	public void setEnemy(Enemy enemy) {
 		this.enemy = enemy;
@@ -82,7 +82,7 @@ public class UI {
 	
 	/**
 	 * Get yes or no (y/n) response from user
-	 * @param message: Should include {@code "(y/n)"} in the message
+	 * @param message Should include String {@code "(y/n)"} in the message
 	 */
 	public String getYesNoResponse(String message) {
 		String response = "";
@@ -175,9 +175,9 @@ public class UI {
 	
 	/**
 	 * Print message notifying who dealt damage to who and for how much damage
-	 * @param target: the one who received the damage
-	 * @param dealer: the one who dealt it
-	 * @param damageTaken: amount of damage dealt
+	 * @param target the one who received the damage
+	 * @param dealer the one who dealt it
+	 * @param damageTaken amount of damage dealt
 	 */
 	public void combatReport(String dealer, String target, int damageTaken) {
 		System.out.printf("%s dealt %d damage to %s.\n", dealer, damageTaken, target);
@@ -185,7 +185,7 @@ public class UI {
 	
 	/**
 	 * Print message notifying event of enemy running away
-	 * @param noAmmo: if true this indicates the enemy had no ammo
+	 * @param noAmmo if true this indicates the enemy had no ammo
 	 */
 	public void enemyRanAway(boolean noAmmo) {
 		String extraInfo = noAmmo ? " since he had no more ammo": "";

@@ -1,7 +1,7 @@
 package edu.cpp.cs.cs141.assignment2;
 
 /**
- * Create {@link GameEngine} object and run the <i>Escape the Dungeon!</i>
+ * Create {@link GameEngine} object and run <i>Escape the Dungeon!</i>
  * @author j
  *
  */

@@ -6,7 +6,7 @@ import java.util.Random;
 
 /**
  * Handles game logic
- * @author j
+ * @author James Taracevicz
  *
  */
 public class GameEngine {
@@ -49,7 +49,7 @@ public class GameEngine {
 	/**
 	 * Delay (in milliseconds) after a step has been taken and there's no enemy
 	 */
-	private long stepDelay = 1750;
+	private long stepDelay = 1850;
 	
 	/**
 	 * random object can generate random doubles and integers
@@ -72,8 +72,7 @@ public class GameEngine {
 	 * Start and run game
 	 */
 	public void run() {
-		
-		player = new Player("Player", 20, pickGun());
+		player = new Player(AGENT.Player.name(), 20, pickGun());
 		setGameSettings();
 		ui.welcome();
 		
@@ -141,7 +140,8 @@ public class GameEngine {
 	 * Fight an enemy in game, gets player action, and determines what happens in fight
 	 */
 	public void fightEnemy() {	
-		enemy = new Enemy(player.position, pickRandomGunForEnemy());
+		enemy = new Enemy(player.position(), null);
+		enemy.equipRandomGun();
 		ui.setEnemy(enemy);
 		boolean enemyDied = false;
 		boolean playerDied = false;
@@ -166,7 +166,7 @@ public class GameEngine {
 		int damageDealt = 0;
 		
 		userAction = ui.getCombatAction();
-		if (userAction.equals("attack")) {
+		if (userAction.equals(COMBAT_ACTION.attack.name())) {
 			hitTarget = player.gun.fire();
 			if (hitTarget) {
 				damageDealt = player.gun.damage();
@@ -189,7 +189,7 @@ public class GameEngine {
 				return true;
 			}
 		}
-		else if (userAction.equals("escape")) {
+		else if (userAction.equals(COMBAT_ACTION.escape.name())) {
 			if (player.escapeSucceeded()) {
 				player.changePositionBy(-1);
 				return true;
@@ -236,13 +236,13 @@ public class GameEngine {
 	public Gun pickGun() {
 		Gun gun;
 		String gunName = ui.getGunChoice();
-		if (gunName.equals("pistol")) {
+		if (gunName.equals(GUN.pistol.name())) {
 			gun = new Pistol();
 		}
-		else if (gunName.equals("rifle")) {
+		else if (gunName.equals(GUN.rifle.name())) {
 			gun = new Rifle();
 		}
-		else if (gunName.equals("shotgun")) {
+		else if (gunName.equals(GUN.shotgun.name())) {
 			gun = new Shotgun();
 		}
 		else {
@@ -252,7 +252,7 @@ public class GameEngine {
 	}
 	
 	/**
-	 * Randomly pick a gun
+	 * Randomly pick a gun; {@link Enemy.equipRandomGun()} also does something similar
 	 * @return the gun object
 	 */
 	public Gun pickRandomGunForEnemy() {

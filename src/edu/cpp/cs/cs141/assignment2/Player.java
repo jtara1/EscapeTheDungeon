@@ -22,7 +22,7 @@ public class Player extends Character {
 	 * @param gun: The gun the player will be holding
 	 */
 	public Player(Gun gun) {
-		super("Player", gun);
+		super(AGENT.Player.name(), gun);
 	}
 	
 	/**

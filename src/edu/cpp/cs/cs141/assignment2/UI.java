@@ -26,13 +26,13 @@ public class UI {
 	
 	/**
 	 * Used in print formatting to determine total (horizontal) characters in player 
-	 * stats text body
+	 * 		stats text body
 	 */
 	private final int playerTextBodyLength = 28;
 	
 	/**
 	 * Integer used in print formatting to determine amount of characters between player and
-	 * enemy gun names
+	 * 		enemy gun names
 	 */
 	private int distanceBetweenGunNames = 0;
 	
@@ -46,16 +46,17 @@ public class UI {
 	/**
 	 * Construct a UI object
 	 * Set {@link player} equal to {@param player} to use to get values of health, position,
-	 * gun, etc.
+	 * 		gun, etc.
 	 */
 	public UI(Player player) {
-		this(); // calls UI() (default constructor)
+		// calls UI() (default constructor)
+		this(); 
 		setPlayer(player);
 	}
 	
 	/**
 	 * Set attribute player to {@param player} and determine how much whitespace needed 
-	 * between player and enemy gun prints
+	 * 		between player and enemy gun prints
 	 * @param player passed parameter becomes player attribute
 	 */
 	public void setPlayer(Player player) {
@@ -99,14 +100,13 @@ public class UI {
 	 */
 	public String getCombatAction() {
 		String userInput = "";
-		String[] options = {"Attack", "Escape"};
-		while (!userInput.equals(options[0].toLowerCase()) &&
-				!userInput.equals(options[1].toLowerCase())) {
+		while (!userInput.equals(COMBAT_ACTION.attack.name()) &&
+				!userInput.equals(COMBAT_ACTION.escape.name())) {
 		
 			System.out.printf(
 					"A fearsome enemy stands in your way.\n" +
-					"Options: %s or %s\n", 
-					options[0], options[1]);
+					"Options: %s or %s\n",
+					COMBAT_ACTION.attack.name(), COMBAT_ACTION.escape.name());
 		userInput = removeCRLF(keyboard.nextLine().toLowerCase().trim());
 		}
 		return userInput;
@@ -116,10 +116,6 @@ public class UI {
 	 * Displays stats of all characters and guns 
 	 */
 	public void printBoard() {
-		if (enemy != null) {
-			printBoard(enemy);
-			return;
-		}
 		System.out.printf(
 				"Tile you're on: %d\n" +
 				"HP: %02d\n" +
@@ -141,7 +137,7 @@ public class UI {
 	public void printBoard(Enemy enemy) {	
 		System.out.printf(
 				"Tile you're on: %d\n" +
-				"Player Stats:%15sEnemy Stats:\n" +
+				"Player stats:%15sEnemy stats:\n" +
 				"HP: %02d%22sHP: %02d\n" +
 				"Gun: %s%" + distanceBetweenGunNames + "sGun: %s\n" +
 				"Ammo: %03d%19sAmmo: %03d\n" +
@@ -179,7 +175,7 @@ public class UI {
 	
 	/**
 	 * Print message notifying who dealt damage to who and for how much damage
-	 * @param target: the one who recieved the damage
+	 * @param target: the one who received the damage
 	 * @param dealer: the one who dealt it
 	 * @param damageTaken: amount of damage dealt
 	 */
@@ -211,15 +207,14 @@ public class UI {
 	 */
 	public String getGunChoice() {
 		String userInput = "";
-		String[] options = {"Pistol", "Rifle", "Shotgun"};
-		while (!userInput.equals(options[0].toLowerCase()) &&
-					!userInput.equals(options[1].toLowerCase()) &&
-					!userInput.equals(options[2].toLowerCase())) {
+		while (!userInput.equals(GUN.pistol.name()) &&
+					!userInput.equals(GUN.rifle.name()) &&
+					!userInput.equals(GUN.pistol.name())) {
 			
 			System.out.printf(
 					"Enter the name of the gun you'd like to use.\n" +
 					"Options: %s, %s, or %s\n", 
-					options[0], options[1], options[2]);
+					GUN.pistol.name(), GUN.rifle.name(), GUN.shotgun.name());
 			userInput = removeCRLF(keyboard.nextLine().toLowerCase().trim());
 		}
 		return userInput;

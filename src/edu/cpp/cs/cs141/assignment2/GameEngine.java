@@ -1,3 +1,16 @@
+/**
+ * CS 141: Intro to Programming and Problem Solving
+ * Professor: Edwin Rodr&iacute;guez
+ *
+ * Programming Assignment #2
+ * 
+ * <i>Escape the Dungeon!</i>
+ * 	Simple and short text-based adventure game in which you progress through a linear dungeon
+ * 	shooting and looting enemies.
+ *
+ * @author James Taracevicz
+ */
+
 package edu.cpp.cs.cs141.assignment2;
 
 import java.util.HashMap;
@@ -47,9 +60,9 @@ public class GameEngine {
 	private final double encounterProbability = 0.15;
 	
 	/**
-	 * Delay (in milliseconds) after a step has been taken and there's no enemy
+	 * Delay (in milliseconds) before next step
 	 */
-	private long stepDelay = 1850;
+	private final long stepDelay = 1850;
 	
 	/**
 	 * random object can generate random doubles and integers
@@ -72,9 +85,10 @@ public class GameEngine {
 	 * Start and run game
 	 */
 	public void run() {
+		ui.welcome();
 		player = new Player(pickGun());
 		setGameSettings();
-		ui.welcome();
+		
 		
 		String proceedQuestion = "Proceed to the next tile (y/n)?";
 		String response = "";
@@ -124,7 +138,7 @@ public class GameEngine {
 	}
 	
 	/**
-	 * Moves the player to next tile and checks if player reached final title
+	 * Moves the player to next tile and checks if player reached final tile
 	 */
 	public void takeStep() {
 		if (player.position() == 10) {
@@ -150,8 +164,9 @@ public class GameEngine {
 			ui.printCombatBoard(); // prints board with additional enemy info			
 			// player action
 			enemyDied = playerCombatTurn();
-			// enemy action
-			playerDied = enemyCombatTurn();
+			// enemy action			
+			if (!enemyDied)
+				playerDied = enemyCombatTurn();
 		}
 		ui.setEnemy(null);
 	}
@@ -178,19 +193,13 @@ public class GameEngine {
 			ui.combatReport(player.name(), enemy.name(), damageDealt);
 			if (enemy.isDead()) {
 				ui.enemyDefeated();
-				ItemDrop item = getRandomItem();
-				if (item.name().equals(medKit.name())) {
-					player.changeHealthBy(item.value());
-				}
-				else if (item.name().equals(ammoPack.name())) {
-					player.gun.changeAmmoBy(item.value());
-				}
-				ui.itemAcquired(item);
+				acquireItemDrop();
 				return true;
 			}
 		}
 		else if (userAction.equals(COMBAT_ACTION.escape.name())) {
 			if (player.escapeSucceeded()) {
+				ui.playerEscaped();
 				player.changePositionBy(-1);
 				return true;
 			}
@@ -225,6 +234,20 @@ public class GameEngine {
 			return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * Handles the actions that should be taken when an item drops
+	 */
+	public void acquireItemDrop() {
+		ItemDrop item = getRandomItem();
+		if (item.name().equals(medKit.name())) {
+			player.changeHealthBy(item.value());
+		}
+		else if (item.name().equals(ammoPack.name())) {
+			player.gun.changeAmmoBy(item.value());
+		}
+		ui.itemAcquired(item);
 	}
 	
 	

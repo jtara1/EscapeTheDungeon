@@ -1,3 +1,16 @@
+/**
+ * CS 141: Intro to Programming and Problem Solving
+ * Professor: Edwin Rodr&iacute;guez
+ *
+ * Programming Assignment #2
+ * 
+ * <i>Escape the Dungeon!</i>
+ * 	Simple and short text-based adventure game in which you progress through a linear dungeon
+ * 	shooting and looting enemies.
+ *
+ * @author James Taracevicz
+ */
+
 package edu.cpp.cs.cs141.assignment2;
 
 /**
@@ -6,20 +19,17 @@ package edu.cpp.cs.cs141.assignment2;
 public interface Agent {
 	
 	/**
-	 * Get position of agent
-	 * @return {@code integer} of position of agent
+	 * @return position of agent in game
 	 */
 	public abstract int position();
 	
 	/**
-	 * Get health of agent
-	 * @return {@code integer} of current health of agent
+	 * @return current health of agent
 	 */
 	public abstract int health();
 	
 	/**
-	 * Change agent health value by {@code amount}
-	 * @param amount value to decrease health by
+	 * @param amount value to change health by
 	 */
 	public abstract void changeHealthBy(int amount);
 	

@@ -1,10 +1,23 @@
+/**
+ * CS 141: Intro to Programming and Problem Solving
+ * Professor: Edwin Rodr&iacute;guez
+ *
+ * Programming Assignment #2
+ * 
+ * <i>Escape the Dungeon!</i>
+ * 	Simple and short text-based adventure game in which you progress through a linear dungeon
+ * 	shooting and looting enemies.
+ *
+ * @author James Taracevicz
+ */
+
 package edu.cpp.cs.cs141.assignment2;
 
 import java.util.Scanner;
 
 /**
  * User Interface (text-based) to display info to user and get user input
- * @author j
+ * @author James Taracevicz
  *
  */
 public class UI {
@@ -28,7 +41,7 @@ public class UI {
 	 * Used in print formatting to determine total (horizontal) characters in player 
 	 * 		stats text body
 	 */
-	private final int playerTextBodyLength = 28;
+	private final int playerTextBodyWidth = 28;
 	
 	/**
 	 * Integer used in print formatting to determine amount of characters between player and
@@ -46,7 +59,7 @@ public class UI {
 	/**
 	 * Construct a UI object
 	 * Set {@link #player} equal to {@code player} to use to get values of health, position,
-	 * 		gun, etc.
+	 * 		gun, etc. from player object
 	 */
 	public UI(Player player) {
 		// calls UI() (default constructor)
@@ -62,7 +75,7 @@ public class UI {
 	public void setPlayer(Player player) {
 		this.player = player;
 		String playerGunName = String.format("Gun: %s", player.gun.name());
-		distanceBetweenGunNames = playerTextBodyLength - playerGunName.length();
+		distanceBetweenGunNames = playerTextBodyWidth - playerGunName.length();
 	}
 	
 	/**
@@ -73,7 +86,7 @@ public class UI {
 	}
 	
 	/**
-	 * Welcome user and describe goal of game
+	 * Print welcome to user and describe goal of game
 	 */
 	public void welcome() {
 		System.out.printf("Escape the Dungeon!\n" +
@@ -154,6 +167,7 @@ public class UI {
 	
 	/**
 	 * Displays stats of all characters and guns, but now there's an enemy on the loose
+	 * Note: This relies on {@link #enemy} attribute being defined with {@link UI#setEnemy}
 	 */
 	public void printCombatBoard() {	
 		System.out.printf(
@@ -225,6 +239,13 @@ public class UI {
 	 */
 	public void enemyDefeated() {
 		System.out.println("Good job defeating the enemy; lets see what it dropped!");
+	}
+	
+	/**
+	 * Print player escape successfully message
+	 */
+	public void playerEscaped() {
+		System.out.println("You're escape to fight another day.");
 	}
 	
 	/**

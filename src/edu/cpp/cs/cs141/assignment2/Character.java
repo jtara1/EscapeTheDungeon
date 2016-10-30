@@ -1,3 +1,16 @@
+/**
+ * CS 141: Intro to Programming and Problem Solving
+ * Professor: Edwin Rodr&iacute;guez
+ *
+ * Programming Assignment #2
+ * 
+ * <i>Escape the Dungeon!</i>
+ * 	Simple and short text-based adventure game in which you progress through a linear dungeon
+ * 	shooting and looting enemies.
+ *
+ * @author James Taracevicz
+ */
+
 package edu.cpp.cs.cs141.assignment2;
 
 /**
@@ -16,7 +29,7 @@ public abstract class Character implements Agent {
 	private int health;
 	
 	/**
-	 * The {@link Gun} object the character has
+	 * The {@link Gun} object the character wields
 	 */
 	public Gun gun;
 	
@@ -31,7 +44,9 @@ public abstract class Character implements Agent {
 	private String name = "";
 	
 	/**
-	 * Set defaults for character with no parameters passed in constructor
+	 * Set defaults for character
+	 * @param name name of character
+	 * @param gun gun the character wields
 	 */
 	public Character(String name, Gun gun) {
 		this.name = name;
@@ -42,7 +57,8 @@ public abstract class Character implements Agent {
 	}
 	
 	/**
-	 * Specify attributes with parameters in constructor
+	 * Specify more attributes
+	 * @param name set {@link #name} to name
 	 * @param hp set {@link #health} and {@link #maxHealth} to hp
 	 * @param pos set {@link #position} to pos
 	 * @param gun set {@link #gun} to gun
@@ -56,7 +72,7 @@ public abstract class Character implements Agent {
 	}
 	
 	/**
-	 * @return name (String) of this character
+	 * @return name of this character
 	 */
 	public String name() {
 		return name;
@@ -77,8 +93,8 @@ public abstract class Character implements Agent {
 	}
 	
 	/**
-	 * Change {@link #health} value by {@code amount}. If new {@link #health} value exceeds
-	 * 		that of {@link #maxHealth}, then set {@link #health} to {@link #maxHealth}
+	 * Change {@link #health} value by {@code amount}. Restrict new {@link #health} value
+	 * 		to be in the range [0, {@link #maxHealth}]
 	 * @param amount value to change health by
 	 */
 	public void changeHealthBy(int amount) {

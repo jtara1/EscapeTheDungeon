@@ -1,3 +1,16 @@
+/**
+ * CS 141: Intro to Programming and Problem Solving
+ * Professor: Edwin Rodr&iacute;guez
+ *
+ * Programming Assignment #2
+ * 
+ * <i>Escape the Dungeon!</i>
+ * 	Simple and short text-based adventure game in which you progress through a linear dungeon
+ * 	shooting and looting enemies.
+ *
+ * @author James Taracevicz
+ */
+
 package edu.cpp.cs.cs141.assignment2;
 
 import java.util.Random;
@@ -82,7 +95,7 @@ public abstract class Gun {
 	}
 	
 	/**
-	 * @return the maximum amount of {@link #ammo} for the gun
+	 * @return the amount of {@link #maxAmmo} for the gun
 	 */
 	public int maxAmmo() {
 		return maxAmmo;
@@ -96,7 +109,7 @@ public abstract class Gun {
 	}
 	
 	/**
-	 * Change {@link #ammo} value by {@code #amount}
+	 * Change {@link #ammo} value by {@code amount}
 	 * @param amount {@link #ammo} becomes {@link #ammo} + {@code amount}
 	 */
 	public void changeAmmoBy(int amount) {

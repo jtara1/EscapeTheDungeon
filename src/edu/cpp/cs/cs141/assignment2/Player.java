@@ -1,3 +1,16 @@
+/**
+ * CS 141: Intro to Programming and Problem Solving
+ * Professor: Edwin Rodr&iacute;guez
+ *
+ * Programming Assignment #2
+ * 
+ * <i>Escape the Dungeon!</i>
+ * 	Simple and short text-based adventure game in which you progress through a linear dungeon
+ * 	shooting and looting enemies.
+ *
+ * @author James Taracevicz
+ */
+
 package edu.cpp.cs.cs141.assignment2;
 
 import java.util.Random;
@@ -10,7 +23,7 @@ public class Player extends Character {
 	/**
 	 * Probability of escape
 	 */
-	private double escapeProbability = 0.1;
+	private final double escapeProbability = 0.1;
 	
 	/**
 	 * Random used for generating random doubles
@@ -28,7 +41,7 @@ public class Player extends Character {
 	/**
 	 * Alternative constructor that allows specification of player name, hp and gun
 	 * @param name name of player
-	 * @param hp amount of hit points
+	 * @param hp amount of current and max hit points
 	 * @param gun gun the player wields
 	 */
 	public Player(String name, int hp, Gun gun) {
@@ -47,7 +60,7 @@ public class Player extends Character {
 	}
 	
 	/**
-	 * @return true if the player successfully escaped
+	 * @return true if the player successfully escaped else false
 	 */
 	public boolean escapeSucceeded() {
 		return random.nextDouble() <= escapeProbability ? true: false;

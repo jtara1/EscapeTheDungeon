@@ -1,7 +1,20 @@
+/**
+ * CS 141: Intro to Programming and Problem Solving
+ * Professor: Edwin Rodr&iacute;guez
+ *
+ * Programming Assignment #2
+ * 
+ * <i>Escape the Dungeon!</i>
+ * 	Simple and short text-based adventure game in which you progress through a linear dungeon
+ * 	shooting and looting enemies.
+ *
+ * @author James Taracevicz
+ */
+
 package edu.cpp.cs.cs141.assignment2;
 
 /**
- * Shared methods and attributes of all dropable items in <i>Escape the Dungeon!</i>
+ * Shared methods and attributes of all items that can be dropped in <i>Escape the Dungeon!</i>
  */
 public abstract class ItemDrop implements Item {
 	
@@ -41,7 +54,7 @@ public abstract class ItemDrop implements Item {
 	}
 	
 	/**
-	 * @return name(String): name of what this object represents
+	 * @return name of what this object represents
 	 */
 	public String name() {
 		return name;
@@ -69,7 +82,7 @@ public abstract class ItemDrop implements Item {
 	}
 	
 	/**
-	 * @return the likelyhood this item drops
+	 * @return the probability this item drops
 	 */
 	public double dropProbability() {
 		return dropProbability;

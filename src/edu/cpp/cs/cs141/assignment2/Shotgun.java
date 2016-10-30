@@ -10,6 +10,6 @@ public class Shotgun extends Gun {
 	 */
 	public Shotgun() {
 		// parameters: name, damage, ammo, accuracy
-		super(GUN.shotgun.name(), 5, 7, 0.40);
+		super(GAME_GUN.shotgun.name(), 5, 7, 0.40);
 	}
 }

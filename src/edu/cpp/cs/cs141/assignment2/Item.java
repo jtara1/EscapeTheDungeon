@@ -17,12 +17,12 @@ public interface Item {
 	public abstract String action();
 	
 	/**
-	 * @return value value attribute of object
+	 * @return value attribute of object
 	 */
 	public abstract int value();
 	
 	/**
-	 * @param value set attribute {@link #value} to {@code value}
+	 * @param value set attribute {@link ItemDrop#value} to {@code value}
 	 */
 	public abstract void setValue(int value);
 	

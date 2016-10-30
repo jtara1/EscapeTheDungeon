@@ -22,7 +22,7 @@ public class Player extends Character {
 	 * @param gun The gun the player has equipped
 	 */
 	public Player(Gun gun) {
-		super(AGENT.Player.name(), gun);
+		super(GAME_AGENT.Player.name(), gun);
 	}
 	
 	/**

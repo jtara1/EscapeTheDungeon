@@ -24,7 +24,7 @@ public class Enemy extends Character {
 	 */
 	public Enemy(int pos, Gun gun) {
 		// parameters: name, hp, position, gun
-		super(AGENT.Enemy.name(), 5, pos, gun);
+		super(GAME_AGENT.Enemy.name(), 5, pos, gun);
 	}
 	
 	/**

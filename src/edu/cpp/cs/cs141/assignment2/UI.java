@@ -137,14 +137,14 @@ public class UI {
 	public void printBoard(Enemy enemy) {	
 		System.out.printf(
 				"Tile you're on: %d\n" +
-				"Player stats:%15sEnemy stats:\n" +
+				"%s Stats:%15s%s Stats:\n" +
 				"HP: %02d%22sHP: %02d\n" +
 				"Gun: %s%" + distanceBetweenGunNames + "sGun: %s\n" +
 				"Ammo: %03d%19sAmmo: %03d\n" +
 				"Accuracy: %.2f%14sAccuracy: %.2f\n" +
 				"Damage: %d%19sDamage: %s\n\n",
 				player.position(),
-				"",
+				player.name(), "", enemy.name(),
 				player.health(), "", enemy.health(),
 				player.gun.name(), "", enemy.gun.name(),
 				player.gun.ammo(), "", enemy.gun.ammo(),
@@ -158,14 +158,14 @@ public class UI {
 	public void printCombatBoard() {	
 		System.out.printf(
 				"Tile you're on: %d\n" +
-				"Player Stats:%15sEnemy Stats:\n" +
+				"%s Stats:%15s%s Stats:\n" +
 				"HP: %02d%22sHP: %02d\n" +
 				"Gun: %s%" + distanceBetweenGunNames + "sGun: %s\n" +
 				"Ammo: %03d%19sAmmo: %03d\n" +
 				"Accuracy: %.2f%14sAccuracy: %.2f\n" +
 				"Damage: %d%19sDamage: %s\n\n",
 				player.position(),
-				"",
+				player.name(), "", enemy.name(),
 				player.health(), "", enemy.health(),
 				player.gun.name(), "", enemy.gun.name(),
 				player.gun.ammo(), "", enemy.gun.ammo(),
@@ -207,14 +207,14 @@ public class UI {
 	 */
 	public String getGunChoice() {
 		String userInput = "";
-		while (!userInput.equals(GUN.pistol.name()) &&
-					!userInput.equals(GUN.rifle.name()) &&
-					!userInput.equals(GUN.pistol.name())) {
+		while (!userInput.equals(GAME_GUN.pistol.name()) &&
+					!userInput.equals(GAME_GUN.rifle.name()) &&
+					!userInput.equals(GAME_GUN.shotgun.name())) {
 			
 			System.out.printf(
 					"Enter the name of the gun you'd like to use.\n" +
 					"Options: %s, %s, or %s\n", 
-					GUN.pistol.name(), GUN.rifle.name(), GUN.shotgun.name());
+					GAME_GUN.pistol.name(), GAME_GUN.rifle.name(), GAME_GUN.shotgun.name());
 			userInput = removeCRLF(keyboard.nextLine().toLowerCase().trim());
 		}
 		return userInput;
@@ -231,7 +231,7 @@ public class UI {
 	 * Print item acquired message
 	 */
 	public void itemAcquired(ItemDrop item) {
-		System.out.printf("You used %s and %s.\n", item.name(), item.action());
+		System.out.printf("You picked up and used %s which %s.\n", item.name(), item.action());
 	}
 	
 	/**

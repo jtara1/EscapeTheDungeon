@@ -72,7 +72,7 @@ public class GameEngine {
 	 * Start and run game
 	 */
 	public void run() {
-		player = new Player(AGENT.Player.name(), 20, pickGun());
+		player = new Player(pickGun());
 		setGameSettings();
 		ui.welcome();
 		
@@ -236,13 +236,13 @@ public class GameEngine {
 	public Gun pickGun() {
 		Gun gun;
 		String gunName = ui.getGunChoice();
-		if (gunName.equals(GUN.pistol.name())) {
+		if (gunName.equals(GAME_GUN.pistol.name())) {
 			gun = new Pistol();
 		}
-		else if (gunName.equals(GUN.rifle.name())) {
+		else if (gunName.equals(GAME_GUN.rifle.name())) {
 			gun = new Rifle();
 		}
-		else if (gunName.equals(GUN.shotgun.name())) {
+		else if (gunName.equals(GAME_GUN.shotgun.name())) {
 			gun = new Shotgun();
 		}
 		else {

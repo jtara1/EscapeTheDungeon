@@ -89,7 +89,6 @@ public class GameEngine {
 		player = new Player(pickGun());
 		setGameSettings();
 		
-		
 		String proceedQuestion = "Proceed to the next tile (y/n)?";
 		String response = "";
 		while (!gameFinished) {
@@ -97,15 +96,14 @@ public class GameEngine {
 			
 			if (settings.get("autoTakeStepMode")) {
 				gameSleep(stepDelay);
-				takeStep();
 			}
 			else {
 				while (!response.equals("y")) {
 					response = ui.getYesNoResponse(proceedQuestion);
 				}
-				takeStep();
 				response = "";
 			}
+			takeStep();
 				
 			if (enemyEncountered()) {
 				fightEnemy();
